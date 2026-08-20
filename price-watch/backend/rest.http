@@ -1,0 +1,119 @@
+### Scapia Price Watch — API scratchpad
+# JetBrains HTTP Client / VS Code REST Client. Run requests top-to-bottom for a full demo.
+# Start the server first:  .venv/bin/python -m uvicorn app.main:app --reload --port 8000
+
+@baseUrl = http://localhost:8000
+@userId = demo-user
+@productId = gully-baaz-faris-black
+@dtcSource = {{productId}}:DTC
+
+### Health
+GET {{baseUrl}}/health
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Catalogue
+# ─────────────────────────────────────────────────────────────────────────────
+
+### List products (derived Scapia + DTC prices)
+GET {{baseUrl}}/api/products
+
+### Get one product
+GET {{baseUrl}}/api/products/{{productId}}
+
+### Price history for a product (SCAPIA + DTC observations)
+GET {{baseUrl}}/api/products/{{productId}}/observations
+
+### Crawl runs for a product (crawler-result UI feed)
+GET {{baseUrl}}/api/products/{{productId}}/crawl-runs
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Watches
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Create a watch  (run this first; later requests read its response for the id)
+# @name createWatch
+POST {{baseUrl}}/api/watches
+Content-Type: application/json
+
+{
+  "userId": "{{userId}}",
+  "productId": "{{productId}}"
+}
+
+### List this user's watches
+GET {{baseUrl}}/api/watches?userId={{userId}}
+
+### Get one watch (uses the id from createWatch's response)
+GET {{baseUrl}}/api/watches/{{createWatch.response.body.$.id}}
+
+### Register a "Buy on Scapia" click (conversion metric)
+POST {{baseUrl}}/api/watches/{{createWatch.response.body.$.id}}/buy-click
+
+### Cancel a watch
+DELETE {{baseUrl}}/api/watches/{{createWatch.response.body.$.id}}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Demo controls
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Set Scapia price (updates product.scapia_price + logs an INTERNAL observation)
+POST {{baseUrl}}/api/demo/products/{{productId}}/scapia-price
+Content-Type: application/json
+
+{
+  "price": 3790
+}
+
+### Set DTC price (writes a mock crawl_run — same path the AI crawler uses)
+POST {{baseUrl}}/api/demo/dtc-sources/{{dtcSource}}/dtc-price
+Content-Type: application/json
+
+{
+  "price": 3790
+}
+
+### Force-evaluate all active watches now (instant on-stage trigger)
+POST {{baseUrl}}/api/demo/evaluate-now
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Dashboard
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Funnel stats
+GET {{baseUrl}}/api/dashboard/stats
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Crawler API (the AI web crawler's integration surface)
+# ─────────────────────────────────────────────────────────────────────────────
+
+### Worklist — DTC sources with an ACTIVE watch (create a watch first to see entries)
+GET {{baseUrl}}/api/internal/crawl-worklist
+
+### Ingest a crawl result (status ∈ OK|DEGRADED|FAILED; price null iff FAILED)
+POST {{baseUrl}}/api/internal/crawl-runs
+Content-Type: application/json
+
+{
+  "dtcSourceId": "{{dtcSource}}",
+  "status": "OK",
+  "price": 3690,
+  "productName": "Gully Number 001 – Baaz Faris Black",
+  "confidence": 0.95
+}
+
+### Ingest a FAILED crawl (no price; backend keeps last known DTC price)
+POST {{baseUrl}}/api/internal/crawl-runs
+Content-Type: application/json
+
+{
+  "dtcSourceId": "{{dtcSource}}",
+  "status": "FAILED",
+  "error": "price selector not found"
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# WebSocket (not runnable from an .http file):
+#   ws://localhost:8000/ws/notifications?userId=demo-user
+# Server pushes { "type":"PRICE_MATCH", ... } when a watch triggers.
+# Try it from a browser console or:  websocat "ws://localhost:8000/ws/notifications?userId=demo-user"
+# ─────────────────────────────────────────────────────────────────────────────

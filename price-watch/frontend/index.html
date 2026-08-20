@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Scapia Price Watch — Seller Console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Seller Console</h1>
+    <p class="sub">Update our Scapia price per product. DTC (brand) price is read-only — it comes from the crawler.</p>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="prices">Update Prices</button>
+      <button class="tab-btn" data-tab="dashboard">Demand &amp; Pricing Dashboard</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="tab-prices" class="tab-panel active">
+      <table id="products-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>DTC price</th>
+            <th>Scapia price</th>
+            <th>New price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="products-body">
+          <tr><td colspan="5" class="empty">Loading…</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="tab-dashboard" class="tab-panel">
+      <div class="stat-cards" id="stat-cards"></div>
+
+      <table id="dashboard-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Requests</th>
+            <th>Active</th>
+            <th>Triggered</th>
+            <th>Scapia price</th>
+            <th>DTC price</th>
+            <th>Position</th>
+          </tr>
+        </thead>
+        <tbody id="dashboard-body">
+          <tr><td colspan="7" class="empty">Loading…</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# sqlite (shared runtime db)
+pricewatch.db
+pricewatch.db-*
+backend/pricewatch.db
+backend/pricewatch.db-*
+
+# node
+node_modules/
+frontend/dist/
+.DS_Store
