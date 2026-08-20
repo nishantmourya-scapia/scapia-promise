@@ -7,6 +7,8 @@ Team **A2N** — Scapia Sandbox 2026.
 **Price Promise**: tell shoppers when a product on Scapia is at price parity with — or cheaper
 than — the brand's own DTC website, so they can buy on Scapia and still earn coins.
 
+📹 **[Demo video](https://drive.google.com/file/d/1s7hDK9OMOcXe95HiwZUGby38SLvRKDvG/view?usp=sharing)**
+
 ---
 
 ## Why
