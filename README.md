@@ -16,27 +16,33 @@ https://github.com/user-attachments/assets/1384553b-916e-4723-ae1a-b5e93302b21f
 
 **User problem**
 - Scapia's marketplace is priced by the brands themselves.
-- Brands can set an SKU higher, lower, or in parity with their own DTC site — and rarely go
-  below their DTC price, which suppresses adoption.
-- Users would buy on Scapia far more readily if they *knew* the price is in parity or lower,
-  because coins on top make it a guaranteed win.
+- Brands can set an SKU higher, lower, or in parity with their own DTC site — and they rarely
+  price below their own DTC site.
+- Users would buy on Scapia far more readily if they *knew* the price is in parity or lower:
+  coins on top make it a guaranteed win, and spending in-store earns them more coins.
 
 **Supply problem**
-- No signal on where we are expensive, and no signal on what users actually want on the platform.
+- No signal on *where we are expensive*, and no signal on *what users actually want* on the
+  platform.
+- No signal on *which products to push down the shelf* — where we can't beat the brand's own
+  site, being visibly expensive destroys store perception.
 
 **How we solve it**
 1. User marks favourite brands/products for **price match** → registers a demand signal.
-2. We periodically scrape the brand's DTC site → registers a *cheaper / parity / expensive* signal.
-3. When parity is reached (DTC price rises, or our price drops via the brand or supply fixing it),
-   we **notify the user** so they can buy and stack coins.
+2. We periodically scrape the brand's DTC site → registers a *cheaper / parity / expensive*
+   signal per SKU.
+3. When parity is reached — DTC price rises, or our price drops because the brand lowered it or
+   supply fixed it — we **notify the user** so they can buy and stack coins, driving adoption.
 
 **Technical bet**
-- Traditional scrapers are rigid, per-site scripts that rot.
-- We replace them with an **agentic scraper**: an LLM agent with browser tools opens the target
-  page, semantically locates the price, and stores it.
-- No per-site script → scales to any brand website.
+- The core problem with scraping systems is rigid, per-site scripts that rot.
+- We replace them with an **agentic scraper**: an agent that uses browser tools to open the
+  target website, semantically find the price, and store it.
+- No rigid script → scales to any and all brand websites.
 
-> **Note:** this is a sandbox MVP. It runs against a small purpose-built subset DB, not prod.
+> **Note:** this is a sandbox MVP. It does not connect to the entire prod DB — it runs against a
+> small purpose-built subset DB created to work out this MVP, so data may not match the idea
+> description one-to-one.
 
 ---
 
