@@ -8,10 +8,7 @@ Team **A2N** — Scapia Sandbox 2026.
 than — the brand's own DTC website, so they can buy on Scapia and still earn coins.
 
 ## 📹 Demo
-
-<a href="https://drive.google.com/file/d/1s7hDK9OMOcXe95HiwZUGby38SLvRKDvG/view?usp=sharing">
-  <img src="https://drive.google.com/thumbnail?id=1s7hDK9OMOcXe95HiwZUGby38SLvRKDvG&sz=w1200" alt="Watch the Price Promise demo" width="640">
-</a>
+https://github.com/user-attachments/assets/1384553b-916e-4723-ae1a-b5e93302b21f
 
 ▶️ [Watch the demo](https://drive.google.com/file/d/1s7hDK9OMOcXe95HiwZUGby38SLvRKDvG/view?usp=sharing)
 
