@@ -10,8 +10,6 @@ than — the brand's own DTC website, so they can buy on Scapia and still earn c
 ## 📹 Demo
 https://github.com/user-attachments/assets/1384553b-916e-4723-ae1a-b5e93302b21f
 
-▶️ [Watch the demo](https://drive.google.com/file/d/1s7hDK9OMOcXe95HiwZUGby38SLvRKDvG/view?usp=sharing)
-
 ---
 
 ## Why
